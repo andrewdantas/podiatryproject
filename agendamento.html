@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento | Nanda - Shalon Adonai</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- Navbar (igual às outras páginas) -->
+    <nav class="navbar navbar-dark bg-purple fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Nanda - Shalon Adonai</a>
+        </div>
+    </nav>
+
+    </nav>
+
+    <div class="container mt-5 pt-4">
+        <h1 class="text-center mb-4">Agende Seu Horário</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Formulário de Agendamento -->
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form id="agendamentoForm">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="tel" class="form-control" id="telefone" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="servico" class="form-label">Serviço</label>
+                                <select class="form-select" id="servico" required>
+                                    <option value="" selected disabled>Selecione um serviço</option>
+                                    <option value="Corte e Escova - Nanda">Corte e Escova (Nanda)</option>
+                                    <option value="Coloração - Carla">Coloração (Carla)</option>
+                                    <option value="Manicure - Juliana">Manicure (Juliana)</option>
+                                    <option value="Pedicure - Juliana">Pedicure (Juliana)</option>
+                                    <option value="Design de Sobrancelhas - Ana">Design de Sobrancelhas (Ana)</option>
+                                    <option value="Depilação - Marta">Depilação (Marta)</option>
+                                    <option value="Podologia - Renata">Podologia (Renata)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="data" required min="" max="">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="hora" class="form-label">Horário</label>
+                                <select class="form-select" id="hora" required>
+                                    <option value="" selected disabled>Selecione um horário</option>
+                                    <!-- Horários serão preenchidos via JavaScript -->
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-purple w-100">Confirmar Agendamento</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Informações do Agendamento -->
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Informações Importantes</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-calendar-check me-2 text-purple"></i>
+                                <strong>Horário de Funcionamento:</strong> Terça a Sábado, das 9h às 19h
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-clock me-2 text-purple"></i>
+                                <strong>Duração dos Serviços:</strong> Variam de 30min a 2h
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-exclamation-circle me-2 text-purple"></i>
+                                Cancelamentos com menos de 24h de antecedência podem ser cobrados
+                            </li>
+                        </ul>
+
+                        <div class="mt-4">
+                            <h5>Nossos Profissionais</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-purple">Nanda - Cabelos</span>
+                                <span class="badge bg-purple">Carla - Coloração</span>
+                                <span class="badge bg-purple">Juliana - Unhas</span>
+                                <span class="badge bg-purple">Ana - Sobrancelhas</span>
+                                <span class="badge bg-purple">Marta - Depilação</span>
+                                <span class="badge bg-purple">Renata - Podologia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmacaoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agendamento Confirmado!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmacaoTexto"></p>
+                    <div class="alert alert-info">
+                        Você receberá um e-mail de confirmação com os detalhes do agendamento.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-purple" data-bs-dismiss="modal">Fechar</button>
+                    <a id="googleCalendarLink" class="btn btn-outline-primary" target="_blank">
+                        <i class="fab fa-google me-2"></i>Adicionar ao Google Agenda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (igual às outras páginas) -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <!-- ... mesmo footer das outras páginas ... -->
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="js/agendamento.js"></script>
+</body>
+
+</html>
