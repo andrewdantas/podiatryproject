@@ -1,0 +1,71 @@
+/* Cores personalizadas */
+:root {
+    --purple: #6a3093;
+    --light-purple: #a044ff;
+}
+
+.bg-purple {
+    background-color: var(--purple) !important;
+}
+
+.btn-purple {
+    background-color: var(--purple);
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: var(--light-purple);
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    margin-top: 56px; /* compensar a navbar fixa */
+}
+
+/* Ajustes gerais */
+body {
+    padding-top: 56px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.card {
+    transition: transform 0.3s;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.social-links a {
+    color: var(--purple);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--light-purple);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+}
