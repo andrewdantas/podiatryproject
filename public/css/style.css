@@ -111,6 +111,25 @@ section {
     animation: pulse 2s infinite;
 }
 
+input:invalid {
+    border-color: #dc3545 !important;
+}
+input:valid {
+    border-color: #28a745 !important;
+}
+
+/* Estilo para datas inválidas */
+input[type="date"]:invalid {
+    border-color: #dc3545;
+    background-color: #fff0f0;
+}
+
+/* Desabilita as setas no Chrome */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
 /* Versão para mobile */
 @media (max-width: 768px) {
     .btn-agendar-flutuante {
