@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento | Nanda - Shalon Adonai</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Nanda - Shalom Adonai | Salão de Beleza</title>
+    <!-- Bootstrap link CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css?v=2" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+
 </head>
+
 <body>
+
     <nav class="navbar navbar-expand navbar-dark bg-purple fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Nanda - Shalon Adonai</a>
+            <a class="navbar-brand" href="index.html">Nanda - Shalom Adonai</a>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="index.html">Home</a>
                 <a class="nav-link" href="cabelos.html">Cabelos</a>
@@ -26,7 +32,7 @@
 
     <div class="container mt-5 pt-4">
         <h1 class="text-center mb-4">Agende Seu Horário</h1>
-        
+
         <div class="row">
             <div class="col-md-6">
                 <div class="card shadow">
@@ -36,12 +42,12 @@
                                 <label for="nome" class="form-label">Nome Completo</label>
                                 <input type="text" class="form-control" id="nome" required>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>
                                 <input type="tel" class="form-control" id="telefone" required>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="servico" class="form-label">Serviço</label>
                                 <select class="form-select" id="servico" required>
@@ -55,28 +61,26 @@
                                     <option value="Podologia - Renata">Podologia (Renata)</option>
                                 </select>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="data" class="form-label">Data</label>
-                                <input type="date" class="form-control" id="data" required
-                                       onkeydown="return false"
-                                       onbeforeinput="event.preventDefault()"
-                                       onfocus="this.showPicker()">
+                                <input type="date" class="form-control" id="data" required onkeydown="return false"
+                                    onbeforeinput="event.preventDefault()" onfocus="this.showPicker()">
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="hora" class="form-label">Horário</label>
                                 <select class="form-select" id="hora" required>
                                     <option value="" selected disabled>Selecione um horário</option>
                                 </select>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-purple w-100">Confirmar Agendamento</button>
                         </form>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
@@ -125,7 +129,12 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts JS -->
     <script src="js/agendamento.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+
 </body>
+
 </html>
