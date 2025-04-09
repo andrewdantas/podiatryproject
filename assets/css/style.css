@@ -149,7 +149,7 @@ h6 {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     padding: 30px;
     border-left: 4px solid var(--purple);
-    height: 80%;
+    height: 95%;
 }
 
 .contact-item {
@@ -320,7 +320,7 @@ footer hr {
 }
 
 .contact-box {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 .btn-agendar-flutuante {
