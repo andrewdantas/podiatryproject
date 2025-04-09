@@ -283,6 +283,12 @@ footer hr {
     box-shadow: 0 4px 12px rgba(106, 48, 147, 0.3);
 }
 
+#iosShareBtn:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
 /* ================ RESPONSIVIDADE ================ */
 @media (max-width: 992px) {
     section {
