@@ -98,14 +98,11 @@
                                 <ul class="mt-2">
                                     <li><strong>Android:</strong> Toque no menu <em>(⋮ )</em> no topo do
                                         navegador e selecione <em>"Adicionar à tela inicial"</em>.</li>
-                                        <li>
-                                            <strong>iOS (iPhone/iPad):</strong> No Safari, toque no ícone 
-                                            <button id="iosShareBtn" style="background: none; border: none; padding: 0;">
-                                                <img src="assets/img/compartilhar_ios.png" alt="Ícone compartilhar iOS" 
-                                                     style="height: 1.5em; vertical-align: middle; margin: 0 0.25em; cursor: pointer;">
-                                            </button>
-                                            na parte inferior da tela e escolha <em>"Adicionar à Tela de Início"</em>.
-                                        </li>
+                                    <li><strong>iOS (iPhone/iPad):</strong> No Safari, toque no ícone<img
+                                            src="../assets/img/compartilhar_ios.png" alt="Ícone compartilhar iOS"
+                                            style="height: 1.5em; vertical-align: middle; margin: 0 0.25em;">na parte
+                                        inferior da tela e escolha <em>"Adicionar à Tela de Início"</em>.
+                                    </li>
                                     <li><strong>Windows:</strong> No navegador Chrome ou Edge, clique no ícone de
                                         instalação na barra de endereços ou vá em <em>Menu > Instalar aplicativo</em>.
                                     </li>
@@ -148,19 +145,6 @@
     <script src="../assets/js/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/scripts.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service_worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registrado com sucesso:', registration)
-                    })
-                    .catch((error) => {
-                        console.log('Falha ao registrar o Service Worker:', error)
-                    })
-            })
-        }
-    </script>
 </body>
 
 </html>

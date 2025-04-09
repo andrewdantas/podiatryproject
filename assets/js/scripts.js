@@ -3,17 +3,14 @@ let ano = document.getElementById("copyrightYear")
 let anoAtual = new Date().getFullYear()
 ano.textContent = anoAtual
 
-document.getElementById('iosShareBtn').addEventListener('click', function() {
-    // Verifica se a API de compartilhamento é suportada
-    if (navigator.share) {
-        navigator.share({
-            title: 'Nanda - Shalom Adonai',
-            text: 'Conheça o salão Shalom Adonai',
-            url: window.location.href
-        })
-        .catch(err => console.log('Erro ao compartilhar:', err));
-    } else {
-        // Fallback para dispositivos sem suporte
-        alert('Toque no ícone de compartilhamento do seu navegador (normalmente no centro inferior da tela) e selecione "Adicionar à Tela de Início".');
-    }
-})
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service_worker.js')
+            .then((registration) => {
+                console.log('Service Worker registrado com sucesso:', registration)
+            })
+            .catch((error) => {
+                console.log('Falha ao registrar o Service Worker:', error)
+            })
+    })
+}
