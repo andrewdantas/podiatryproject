@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanda - Shalom Adonai | Salão de Beleza</title>
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- Bootstrap link CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link href="css/bootstrap.min.css?v=2" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="manifest.json">
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#6a3093">
+    <title>Agendamento | Nanda - Shalom Adonai</title>
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../assets/img/icons/ios/180.png">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="manifest" href="../manifest.json">
 </head>
 
 <body>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand navbar-dark bg-purple fixed-top">
         <div class="container">
@@ -98,7 +99,7 @@
                                     <li><strong>Android:</strong> Toque no menu <em>(⋮ )</em> no topo do
                                         navegador e selecione <em>"Adicionar à tela inicial"</em>.</li>
                                     <li><strong>iOS (iPhone/iPad):</strong> No Safari, toque no ícone<img
-                                            src="img/compartilhar_ios.png" alt="Ícone compartilhar iOS"
+                                            src="../assets/img/compartilhar_ios.png" alt="Ícone compartilhar iOS"
                                             style="height: 1.5em; vertical-align: middle; margin: 0 0.25em;">na parte
                                         inferior da tela e escolha <em>"Adicionar à Tela de Início"</em>.
                                     </li>
@@ -107,7 +108,6 @@
                                     </li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -140,12 +140,24 @@
     </div>
 
     <!-- Scripts JS -->
-    <script src="js/agendamento.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="js/attyear.js"></script>
-
+    <script src="../assets/js/agendamento.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/attyear.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service_worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado com sucesso:', registration)
+                    })
+                    .catch((error) => {
+                        console.log('Falha ao registrar o Service Worker:', error)
+                    })
+            })
+        }
+    </script>
 </body>
 
 </html>
