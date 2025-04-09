@@ -9,7 +9,7 @@ const ASSETS = [
     '/assets/js/agendamento.js', 
     '/assets/js/jquery.min.js', 
     '/assets/js/popper.min.js',  
-    '/assets/js/attyear.js',
+    '/assets/js/scripts.js',
     '/assets/js/pwa.js',
     '/manifest.json',
     '/assets/img/cabelos.jpg',      
