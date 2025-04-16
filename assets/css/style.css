@@ -9,6 +9,8 @@
     --text-color: #333333;
 }
 
+
+
 /* ================ ESTILOS GERAIS ================ */
 body {
     font-family: 'Arial', sans-serif;
@@ -56,13 +58,28 @@ h6 {
     opacity: 0.8;
 }
 
+ bg-purple -->.bg-purple {
+    background-color: #6f2da8 !important;
+    /* tom de roxo bonito */
+}
+
+.navbar-brand .fas {
+    font-size: 1.2rem;
+}
+
+.custom-spacing {
+    padding-left: 20px;
+    /* ou use margin-left: 20px; */
+}
+
 /* ================ HERO SECTION ================ */
 
 /* Seção Hero com imagem de fundo */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), no-repeat center center;
     position: relative;
-    height: 100vh; /* ou ajuste conforme necessário */
+    height: 100vh;
+    /* ou ajuste conforme necessário */
     overflow: hidden;
     background-size: cover;
     height: 80vh;

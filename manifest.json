@@ -1,9 +1,9 @@
 {
-    "name": "Nanda - Shalon Adonai",
-    "short_name": "Shalon Adonai",
+    "name": "Nanda - Shalom Adonai",
+    "short_name": "Shalom Adonai",
     "description": "Salão de beleza feminino especializado em cabelos, unhas e tratamentos estéticos.",
     "lang": "pt-BR",
-    "start_url": "/podiatryproject/pages/agendamento.html",
+    "start_url": "/salaov2.1/pages/agendamento.html",
     "scope": "/",
     "display": "standalone",
     "background_color": "#6a3093",
