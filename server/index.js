@@ -1,35 +1,32 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const { getAuthUrl, setCredentialsFromCode, oAuth2Client } = require('./googleAuth');
-const criarEvento = require('./calendar');
+const criarEvento = require('/Calendar');
+const { oAuth2Client } = require('./GoogleAuth');
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 
-// Rota para obter URL de autenticação
-app.get('/auth', (req, res) => {
-  res.send({ url: getAuthUrl() });
-});
-
-// Callback após autorização do Google
-app.get('/auth/callback', async (req, res) => {
-  const { code } = req.query;
-  await setCredentialsFromCode(code);
-  res.send('Autenticado com sucesso! Você pode fechar esta janela.');
-});
-
 // Rota para criar evento
-app.post('/criar-evento', async (req, res) => {
+app.post('/api/criar-evento', async (req, res) => {
+  const dados = req.body; // Dados enviados no corpo da requisição
+
   try {
-    const dados = req.body;
-    const response = await criarEvento(oAuth2Client, dados);
-    res.send({ status: 'ok', eventoId: response.data.id });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Erro ao criar evento');
+    // Usa o OAuth2Client para fazer a autenticação
+    const auth = oAuth2Client;
+    
+    // Tenta criar o evento
+    const eventoCriado = await criarEvento(auth, dados);
+    
+    // Retorna o evento criado no formato JSON
+    res.status(200).json(eventoCriado);
+  } catch (error) {
+    // Se ocorrer erro, retorna uma resposta JSON com erro
+    res.status(500).json({ message: 'Erro ao criar evento', error: error.message });
   }
 });
 
-app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
