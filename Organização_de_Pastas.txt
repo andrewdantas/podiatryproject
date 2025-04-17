@@ -1,4 +1,4 @@
-SALAOV2/
+podiatryproject/
 │
 ├── 📁 assets/                      # Arquivos estáticos (visuais e scripts personalizados)
 │   ├── 📁 css/                    # Estilos CSS criados por você
@@ -32,10 +32,22 @@ SALAOV2/
 │   ├── sobrancelhas.html         # Página sobre sobrancelhas
 │   └── unhas.html                # Página sobre unhas
 │
-├── 📁 service/                    # Arquivos relacionados ao funcionamento do PWA
-│   ├── manifest.json             # Descreve aparência do app (nome, ícone, cor, etc.)
-│   └── service_worker.js         # Controla o cache, funcionamento offline, e atualizações
-│
+├── 📁 server/ 
+|   |
+|   |── 📁 node_modules/   
+|   ├── .env
+|   ├── calendar.js
+|   ├── googleAuth.js           
+│   ├── index.js
+|
 ├── index.html                    # Página inicial do site
+├── .gitignore
+|                  
+├── manifest.json             
+├── service_worker.js
+|      
+├── package.json
+├── package-lock.json
+|
 ├── LICENSE                       # Licença de uso do projeto (opcional)
 └── README.md                     # Explicação sobre o projeto, como rodar, dependências, etc.

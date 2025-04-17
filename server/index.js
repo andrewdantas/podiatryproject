@@ -6,21 +6,23 @@ const { google } = require('googleapis');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 
-// Servir arquivos estáticos da estrutura atual
-app.use('/pages', express.static(path.join(__dirname, '..', 'pages')));
-app.use('/js', express.static(path.join(__dirname, '..', 'assets', 'js')));
+// Servir todos os arquivos estáticos corretamente
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use('/bootstrap', express.static(path.join(__dirname, '..', 'bootstrap')));
-app.use('/assets/img', express.static(path.join(__dirname, '..', 'assets', 'img')));
+app.use('/pages', express.static(path.join(__dirname, '..', 'pages')));
 
-// Página principal
+// Servir o index.html diretamente da raiz
+app.use(express.static(path.join(__dirname, '..')));
+
+// Página inicial (index.html)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'pages', 'agendamento.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // OAuth2 client
@@ -52,7 +54,7 @@ app.get('/auth/callback', async (req, res) => {
   }
 });
 
-// Criar evento
+// Criar evento no Google Agenda
 app.post('/criar-evento', async (req, res) => {
   const { nome, telefone, servicos, dataInicio, dataFim } = req.body;
 
