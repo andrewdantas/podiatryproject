@@ -236,34 +236,23 @@
         </div>
     </div>
 
-    <!-- Modal de Confirmação -->
-    <div class="modal fade" id="confirmacaoModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0">
-                <div class="modal-header bg-purple text-white">
-                    <h5 class="modal-title">
-                        <i class="fas fa-check-circle me-2"></i> Agendamento Confirmado!
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <p id="confirmacaoTexto" class="lead"></p>
-                    <div class="alert bg-purple bg-opacity-10 border-start border-purple border-4">
-                        <i class="fas fa-envelope text-purple me-2"></i>
-                        Você receberá um e-mail com os detalhes do agendamento.
-                    </div>
-                    <div class="d-grid gap-2 mt-3">
-                        <a id="googleCalendarLink" class="btn btn-outline-purple" target="_blank">
-                            <i class="fab fa-google me-2"></i> Adicionar ao Google Agenda
-                        </a>
-                        <a id="whatsappLink" class="btn btn-outline-secondary" target="_blank">
-                            <i class="fab fa-whatsapp me-2"></i> Enviar para WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- Modal de confirmação -->
+<div class="modal fade" id="confirmacaoModal" tabindex="-1" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmacaoModalLabel">Confirmação de Agendamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <p id="confirmacaoTexto"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
     </div>
+  </div>
 
     <!-- Scripts -->
     <script src="../assets/js/jquery.min.js"></script>

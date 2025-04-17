@@ -86,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('confirmacaoTexto').textContent = detalhes;
 
     try {
-      const response = await fetch('http://localhost:3000/criar-evento', {
+      // Alterando a URL para a produção
+      const response = await fetch('https://podiatryproject.onrender.com/criar-evento', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
