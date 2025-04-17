@@ -1,32 +1,93 @@
 const express = require('express');
+const path = require('path');
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const criarEvento = require('/Calendar');
-const { oAuth2Client } = require('./GoogleAuth');
+const { google } = require('googleapis');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middlewares
+app.use(cors());
 app.use(bodyParser.json());
 
-// Rota para criar evento
-app.post('/api/criar-evento', async (req, res) => {
-  const dados = req.body; // Dados enviados no corpo da requisição
+// Servir arquivos estáticos da estrutura atual
+app.use('/pages', express.static(path.join(__dirname, '..', 'pages')));
+app.use('/js', express.static(path.join(__dirname, '..', 'assets', 'js')));
+app.use('/bootstrap', express.static(path.join(__dirname, '..', 'bootstrap')));
+app.use('/assets/img', express.static(path.join(__dirname, '..', 'assets', 'img')));
 
+// Página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'pages', 'agendamento.html'));
+});
+
+// OAuth2 client
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
+);
+
+// Rota de autenticação
+app.get('/auth', (req, res) => {
+  const url = oAuth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: 'https://www.googleapis.com/auth/calendar'
+  });
+  res.json({ url });
+});
+
+// Rota de callback do Google OAuth
+app.get('/auth/callback', async (req, res) => {
+  const code = req.query.code;
   try {
-    // Usa o OAuth2Client para fazer a autenticação
-    const auth = oAuth2Client;
-    
-    // Tenta criar o evento
-    const eventoCriado = await criarEvento(auth, dados);
-    
-    // Retorna o evento criado no formato JSON
-    res.status(200).json(eventoCriado);
+    const { tokens } = await oAuth2Client.getToken(code);
+    oAuth2Client.setCredentials(tokens);
+    res.send('Autenticado com sucesso! Você pode fechar esta janela.');
   } catch (error) {
-    // Se ocorrer erro, retorna uma resposta JSON com erro
-    res.status(500).json({ message: 'Erro ao criar evento', error: error.message });
+    console.error('Erro ao autenticar:', error);
+    res.status(500).send('Erro ao autenticar');
   }
 });
 
+// Criar evento
+app.post('/criar-evento', async (req, res) => {
+  const { nome, telefone, servicos, dataInicio, dataFim } = req.body;
+
+  if (!oAuth2Client.credentials.access_token) {
+    return res.status(401).json({ erro: 'Não autenticado no Google' });
+  }
+
+  const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
+
+  const evento = {
+    summary: `Agendamento - ${nome}`,
+    description: `Serviços: ${servicos} | Telefone: ${telefone}`,
+    start: {
+      dateTime: dataInicio,
+      timeZone: 'America/Sao_Paulo'
+    },
+    end: {
+      dateTime: dataFim,
+      timeZone: 'America/Sao_Paulo'
+    }
+  };
+
+  try {
+    const response = await calendar.events.insert({
+      calendarId: 'primary',
+      requestBody: evento
+    });
+    res.json({ mensagem: 'Evento criado com sucesso!', evento: response.data });
+  } catch (error) {
+    console.error('Erro ao criar evento:', error);
+    res.status(500).send('Erro ao criar evento no Google Calendar');
+  }
+});
+
+// Inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
