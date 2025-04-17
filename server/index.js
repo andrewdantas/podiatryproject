@@ -90,6 +90,6 @@ app.post('/criar-evento', async (req, res) => {
 });
 
 // Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+app.listen(process.env.PORT || 10000, () => {
+  console.log(`Servidor rodando em http://localhost:${process.env.PORT || 10000}`);
 });
