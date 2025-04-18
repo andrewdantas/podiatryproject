@@ -86,8 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('confirmacaoTexto').textContent = detalhes;
 
     try {
-      // Alterando a URL para a produção
-      const response = await fetch('https://podiatryproject.onrender.com/criar-evento', {
+      // Fazendo a requisição para o backend para obter a URL de autorização
+      const response = await fetch('/gerar-url-autorizacao'); // Requisição para o backend
+      const dataAuth = await response.json(); // Obtém a URL de autorização
+
+      if (dataAuth.authUrl) {
+        // Redireciona o usuário para a URL de autorização
+        window.location.href = dataAuth.authUrl;
+      } else {
+        alert("Erro ao obter URL de autorização.");
+        return;
+      }
+
+      // Caso o usuário já tenha autenticado, cria o evento
+      const responseEvento = await fetch('https://podiatryproject.onrender.com/criar-evento', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       });
 
-      const result = await response.json();
+      const result = await responseEvento.json();
       console.log(result);  // Adicionando log da resposta da API para depuração
 
-      if (response.ok) {
+      if (responseEvento.ok) {
         console.log('Evento criado com sucesso:', result);
         const modal = document.getElementById('confirmacaoModal');
         if (modal) {

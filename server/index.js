@@ -32,13 +32,13 @@ const oAuth2Client = new google.auth.OAuth2(
   process.env.REDIRECT_URI
 );
 
-// Rota de autenticação
-app.get('/auth', (req, res) => {
+// Rota para gerar URL de autorização
+app.get('/gerar-url-autorizacao', (req, res) => {
   const url = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: 'https://www.googleapis.com/auth/calendar'
   });
-  res.json({ url });
+  res.json({ authUrl: url });
 });
 
 // Rota de callback do Google OAuth
