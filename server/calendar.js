@@ -1,6 +1,17 @@
 require('dotenv').config(); // Carregar variáveis de ambiente do .env
 const { google } = require('googleapis');
 
+// Dados do cliente OAuth2 a partir das variáveis de ambiente
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+
+// Criação do cliente OAuth2
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+);
 
 // Escopo para acessar o Google Calendar
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
