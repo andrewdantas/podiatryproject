@@ -98,19 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
           dataFim: new Date(dataISO.getTime() + 60 * 60000).toISOString()
         })
       });
-    
+
       const result = await response.json();
       console.log(result);  // Adicionando log da resposta da API para depuração
-    
+
       if (response.ok) {
         console.log('Evento criado com sucesso:', result);
-        
-        // Verifica se o modal existe e então exibe
         const modal = document.getElementById('confirmacaoModal');
         if (modal) {
-          new bootstrap.Modal(modal).show();  // Exibe o modal de confirmação
+          new bootstrap.Modal(modal).show();
         }
-    
       } else {
         throw new Error('Erro ao criar evento no Google Calendar.');
       }
@@ -118,20 +115,5 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
       alert('Ocorreu um erro ao confirmar o agendamento.');
     }
-
-    // Verifica se o link do WhatsApp está disponível antes de modificar
-    const whatsappLinkElement = document.getElementById('whatsappLink');
-    if (whatsappLinkElement) {
-      const whatsappLink = gerarLinkWhatsApp(nome, telefone, servicosTexto, dataFormatada, hora);
-      whatsappLinkElement.href = whatsappLink;
-    } else {
-      console.error('Elemento com id "whatsappLink" não encontrado.');
-    }
   });
-
-  function gerarLinkWhatsApp(nome, telefone, servico, data, hora) {
-    const texto = `Olá Shalom Adonai! Confirme meu agendamento:\n\n` +
-      `*Nome:* ${nome}\n*Telefone:* ${telefone}\n*Data:* ${data} às ${hora}\n*Serviço:* ${servico}\n\nPor favor, confirme.`;
-    return `https://wa.me/5511967036990?text=${encodeURIComponent(texto)}`;
-  }
 });
