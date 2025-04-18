@@ -1,9 +1,10 @@
+require('dotenv').config(); // Carregar variáveis de ambiente do .env
 const { google } = require('googleapis');
 
-// Dados do cliente OAuth2
-const CLIENT_ID = '862704649748-rhg0b1l83ssdinc019pqr453br8927sk.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://podiatryproject.onrender.com/auth/callback';
+// Dados do cliente OAuth2 a partir das variáveis de ambiente
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 // Criação do cliente OAuth2
 const oAuth2Client = new google.auth.OAuth2(
@@ -35,8 +36,26 @@ async function definirCredenciais(codigoDeAutorizacao) {
   }
 }
 
+// Função para verificar e renovar o token, se necessário
+async function verificarRenovacaoToken() {
+  const tokenExpirado = oAuth2Client.credentials.expiry_date < Date.now();
+  if (tokenExpirado) {
+    try {
+      // Tenta renovar o token
+      const { tokens } = await oAuth2Client.refreshAccessToken();
+      oAuth2Client.setCredentials(tokens);
+      console.log('Token renovado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao renovar o token:', error);
+    }
+  }
+}
+
 // Função para criar evento no Google Calendar
 async function criarEvento(auth, dados) {
+  // Verificando a necessidade de renovação do token antes de criar o evento
+  await verificarRenovacaoToken();
+
   const calendar = google.calendar({ version: 'v3', auth });
 
   try {
@@ -53,7 +72,7 @@ async function criarEvento(auth, dados) {
         timeZone: 'America/Sao_Paulo',
       },
       attendees: [
-        { email: 'dantasandrew05@gmail.com' } // Aqui, você pode adicionar os emails dos participantes
+        { email: 'dantasandrew05@gmail.com' }, // Adicionar os e-mails dos participantes
       ],
     };
 

@@ -32,6 +32,21 @@ const oAuth2Client = new google.auth.OAuth2(
   process.env.REDIRECT_URI
 );
 
+// Função para verificar e renovar o token, se necessário
+async function verificarRenovacaoToken() {
+  const tokenExpirado = oAuth2Client.credentials.expiry_date < Date.now();
+  if (tokenExpirado) {
+    try {
+      const { tokens } = await oAuth2Client.refreshAccessToken();
+      oAuth2Client.setCredentials(tokens);
+      console.log('Token renovado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao renovar o token:', error);
+      throw new Error('Erro ao renovar o token');
+    }
+  }
+}
+
 // Rota para gerar URL de autorização
 app.get('/gerar-url-autorizacao', (req, res) => {
   const url = oAuth2Client.generateAuthUrl({
@@ -47,7 +62,7 @@ app.get('/auth/callback', async (req, res) => {
   try {
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
-    res.send('Autenticado com sucesso! Você pode fechar esta janela.');
+    res.send('<h1>Autenticado com sucesso! Você pode fechar esta janela.</h1>');
   } catch (error) {
     console.error('Erro ao autenticar:', error);
     res.status(500).send('Erro ao autenticar');
@@ -62,22 +77,25 @@ app.post('/criar-evento', async (req, res) => {
     return res.status(401).json({ erro: 'Não autenticado no Google' });
   }
 
-  const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
-
-  const evento = {
-    summary: `Agendamento - ${nome}`,
-    description: `Serviços: ${servicos} | Telefone: ${telefone}`,
-    start: {
-      dateTime: dataInicio,
-      timeZone: 'America/Sao_Paulo'
-    },
-    end: {
-      dateTime: dataFim,
-      timeZone: 'America/Sao_Paulo'
-    }
-  };
-
+  // Verifica se o token precisa ser renovado antes de criar o evento
   try {
+    await verificarRenovacaoToken();
+
+    const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
+
+    const evento = {
+      summary: `Agendamento - ${nome}`,
+      description: `Serviços: ${servicos} | Telefone: ${telefone}`,
+      start: {
+        dateTime: dataInicio,
+        timeZone: 'America/Sao_Paulo'
+      },
+      end: {
+        dateTime: dataFim,
+        timeZone: 'America/Sao_Paulo'
+      }
+    };
+
     const response = await calendar.events.insert({
       calendarId: 'primary',
       requestBody: evento
@@ -90,6 +108,6 @@ app.post('/criar-evento', async (req, res) => {
 });
 
 // Inicia o servidor
-app.listen(process.env.PORT || 10000, () => {
-  console.log(`Servidor rodando em http://localhost:${process.env.PORT || 10000}`);
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
