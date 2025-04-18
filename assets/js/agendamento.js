@@ -98,11 +98,19 @@ document.addEventListener('DOMContentLoaded', () => {
           dataFim: new Date(dataISO.getTime() + 60 * 60000).toISOString()
         })
       });
-
+    
       const result = await response.json();
+      console.log(result);  // Adicionando log da resposta da API para depuração
+    
       if (response.ok) {
         console.log('Evento criado com sucesso:', result);
-        new bootstrap.Modal(document.getElementById('confirmacaoModal')).show();
+        
+        // Verifica se o modal existe e então exibe
+        const modal = document.getElementById('confirmacaoModal');
+        if (modal) {
+          new bootstrap.Modal(modal).show();  // Exibe o modal de confirmação
+        }
+    
       } else {
         throw new Error('Erro ao criar evento no Google Calendar.');
       }
@@ -111,12 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Ocorreu um erro ao confirmar o agendamento.');
     }
 
-    // Gerar link do WhatsApp
-    const whatsappLink = gerarLinkWhatsApp(nome, telefone, servicosTexto, dataFormatada, hora);
-
-    // Verificar se o elemento existe antes de modificar o href
+    // Verifica se o link do WhatsApp está disponível antes de modificar
     const whatsappLinkElement = document.getElementById('whatsappLink');
     if (whatsappLinkElement) {
+      const whatsappLink = gerarLinkWhatsApp(nome, telefone, servicosTexto, dataFormatada, hora);
       whatsappLinkElement.href = whatsappLink;
     } else {
       console.error('Elemento com id "whatsappLink" não encontrado.');
