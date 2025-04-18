@@ -111,8 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Ocorreu um erro ao confirmar o agendamento.');
     }
 
+    // Gerar link do WhatsApp
     const whatsappLink = gerarLinkWhatsApp(nome, telefone, servicosTexto, dataFormatada, hora);
-    document.getElementById('whatsappLink').href = whatsappLink;
+
+    // Verificar se o elemento existe antes de modificar o href
+    const whatsappLinkElement = document.getElementById('whatsappLink');
+    if (whatsappLinkElement) {
+      whatsappLinkElement.href = whatsappLink;
+    } else {
+      console.error('Elemento com id "whatsappLink" não encontrado.');
+    }
   });
 
   function gerarLinkWhatsApp(nome, telefone, servico, data, hora) {
