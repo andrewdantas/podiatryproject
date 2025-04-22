@@ -180,38 +180,59 @@
                     </div>
                 </div>
             </div>
-            <!-- Informações Importantes -->
-            <div class="col-lg-5">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-4">
-                            <i class="fas fa-calendar-check me-2 text-purple"></i> Informações Importantes
-                        </h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center border-0 py-3">
-                                <div class="bg-opacity-10 me-3">
-                                    <i class="fas fa-calendar-check me-2 text-purple"></i>
-                                </div>
-                                <div>
-                                    <strong>Horário de Funcionamento:</strong><br>
-                                    Terça a Sábado, das 9h às 19h
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex align-items-center border-0 py-3">
-                                <div class="bg-opacity-10 me-3">
-                                    <i class="fas fa-phone me-2 text-purple"></i>
-                                </div>
-                                <div>
-                                    <strong>Telefone:</strong><br>
-                                    (11) 5555-5555
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+             <!-- Informações Importantes -->
+      <div class="col-lg-5">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body p-4">
+            <h5 class="card-title fw-bold mb-4">
+              <i class="fas fa-calendar-check me-2 text-purple"></i> Informações Importantes
+            </h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex align-items-center border-0 py-3">
+                <div class="bg-opacity-10 me-3">
+                  <i class="fas fa-calendar-check me-2 text-purple"></i>
                 </div>
-            </div>
+                <div>
+                  <strong>Horário de Funcionamento:</strong><br>
+                  Terça a Sábado, das 9h às 19h
+                </div>
+              </li>
+              <li class="list-group-item d-flex align-items-center border-0 py-3">
+                <div class="bg-opacity-10 me-3">
+                  <i class="fas fa-phone me-2 text-purple"></i>
+                </div>
+                <div>
+                  <strong>Telefone:</strong><br>
+                  (11) 5555-5555
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- Modal de Sucesso -->
+  <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-success">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="modalSucessoLabel">
+            <i class="fas fa-check-circle me-2"></i>Agendamento Confirmado
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="mb-3 fw-bold">Seu horário foi agendado com sucesso!</p>
+          <a id="linkEvento" href="#" target="_blank" class="btn btn-success">
+            <i class="fas fa-calendar-alt me-2"></i> Ver no Google Agenda
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

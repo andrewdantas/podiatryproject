@@ -107,6 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const resultado = await res.json();
       document.getElementById('confirmacaoTexto').textContent = `✅ Agendamento criado com sucesso para ${data} às ${hora}.`;
+      
+      // Exibir modal de sucesso com o link para o evento
+      const link = document.getElementById('linkEvento');
+      if (link && resultado.htmlLink) {
+        link.href = resultado.htmlLink; // Definindo o link para o Google Agenda
+        const modal = new bootstrap.Modal(document.getElementById('modalSucesso'));
+        modal.show(); // Exibe o modal de sucesso
+      }
+
       const modal = document.getElementById('confirmacaoModal');
       if (modal) new bootstrap.Modal(modal).show();
     } catch (err) {
