@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const hoje = new Date();
   dataInput.min = hoje.toISOString().split('T')[0];
 
-  // Formatação dinâmica do telefone
   telefoneInput.addEventListener('input', () => {
     telefoneInput.value = formatarTelefone(telefoneInput.value);
   });
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7, 11)}`;
   }
 
-  // Atualiza horários ao mudar a data
   dataInput.addEventListener('change', () => {
     const data = new Date(dataInput.value + 'T12:00:00');
     const diaSemana = data.getDay();
@@ -54,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
       : `<option>😢 Nenhum horário disponível</option>`;
   });
 
-  // Submissão do formulário
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -66,66 +63,75 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('input[name="servicos[]"]:checked');
     const servicos = Array.from(checkboxes).map(checkbox => checkbox.value);
 
-    if (servicos.length === 0) {
-      alert('Selecione pelo menos um serviço!');
-      return;
-    }
-
-    if (!data || !hora) {
-      alert('Preencha todos os campos!');
+    if (servicos.length === 0 || !data || !hora) {
+      alert('Preencha todos os campos e selecione pelo menos um serviço.');
       return;
     }
 
     const [ano, mes, dia] = data.split('-');
     const [h, min] = hora.split(':');
-    const dataISO = new Date(ano, mes - 1, dia, h, min);
-    const dataFormatada = `${dia}/${mes}/${ano}`;
-
+    const dataInicio = new Date(ano, mes - 1, dia, h, min);
+    const dataFim = new Date(dataInicio.getTime() + 60 * 60000); // 1h depois
     const servicosTexto = servicos.join(', ');
-    const detalhes = `Olá ${nome}, seu agendamento para ${servicosTexto} no dia ${dataFormatada} às ${hora} foi confirmado!`;
-    document.getElementById('confirmacaoTexto').textContent = detalhes;
+
+    const payload = {
+      nome,
+      telefone,
+      servicos: servicosTexto,
+      dataInicio: dataInicio.toISOString(),
+      dataFim: dataFim.toISOString()
+    };
 
     try {
-      // Fazendo a requisição para o backend para obter a URL de autorização
-      const response = await fetch('/gerar-url-autorizacao'); // Requisição para o backend
-      const dataAuth = await response.json(); // Obtém a URL de autorização
+      // Primeiro tenta criar o evento diretamente
+      const res = await fetch('/criar-evento', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-      if (dataAuth.authUrl) {
-        // Redireciona o usuário para a URL de autorização
-        window.location.href = dataAuth.authUrl;
-      } else {
-        alert("Erro ao obter URL de autorização.");
+      if (res.status === 401) {
+        // Não autenticado: redireciona para login e salva os dados no localStorage
+        localStorage.setItem('agendamentoPendente', JSON.stringify(payload));
+        const auth = await fetch('/gerar-url-autorizacao');
+        const data = await auth.json();
+        window.location.href = data.authUrl;
         return;
       }
 
-      // Caso o usuário já tenha autenticado, cria o evento
-      const responseEvento = await fetch('https://podiatryproject.onrender.com/criar-evento', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nome,
-          telefone,
-          servicos: servicosTexto,
-          dataInicio: dataISO.toISOString(),
-          dataFim: new Date(dataISO.getTime() + 60 * 60000).toISOString()
-        })
-      });
-
-      const result = await responseEvento.json();
-      console.log(result);  // Adicionando log da resposta da API para depuração
-
-      if (responseEvento.ok) {
-        console.log('Evento criado com sucesso:', result);
-        const modal = document.getElementById('confirmacaoModal');
-        if (modal) {
-          new bootstrap.Modal(modal).show();
-        }
-      } else {
-        throw new Error('Erro ao criar evento no Google Calendar.');
+      if (!res.ok) {
+        const err = await res.json();
+        alert('Erro ao criar evento: ' + err.message);
+        return;
       }
-    } catch (error) {
-      console.error(error);
-      alert('Ocorreu um erro ao confirmar o agendamento.');
+
+      const resultado = await res.json();
+      document.getElementById('confirmacaoTexto').textContent = `✅ Agendamento criado com sucesso para ${data} às ${hora}.`;
+      const modal = document.getElementById('confirmacaoModal');
+      if (modal) new bootstrap.Modal(modal).show();
+    } catch (err) {
+      console.error(err);
+      alert('Erro ao tentar agendar.');
     }
   });
+
+  // Se o usuário voltou da autenticação, verifica se há dados salvos
+  const agendamentoPendente = localStorage.getItem('agendamentoPendente');
+  if (agendamentoPendente) {
+    const dados = JSON.parse(agendamentoPendente);
+    fetch('/criar-evento', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log('Evento criado após autenticação:', res);
+        localStorage.removeItem('agendamentoPendente');
+        alert('Agendamento confirmado após login!');
+      })
+      .catch(err => {
+        console.error('Erro após autenticação:', err);
+      });
+  }
 });
