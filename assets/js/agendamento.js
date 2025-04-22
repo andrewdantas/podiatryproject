@@ -79,9 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       telefone,
       servicos: servicosTexto,
       dataInicio: dataInicio.toISOString(),
-      dataFim: dataFim.toISOString(),
-      emailUsuario: 'rizexff@gmail.com', // O e-mail do usuário
-      emailEmpresa: 'dantasandrew05@gmail.com'  // E-mail da empresa
+      dataFim: dataFim.toISOString()
     };
 
     try {
@@ -109,45 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const resultado = await res.json();
       document.getElementById('confirmacaoTexto').textContent = `✅ Agendamento criado com sucesso para ${data} às ${hora}.`;
-
+      
       // Exibir modal de sucesso com o link para o evento
       const link = document.getElementById('linkEvento');
       if (link && resultado.htmlLink) {
         link.href = resultado.htmlLink; // Definindo o link para o Google Agenda
         const modal = new bootstrap.Modal(document.getElementById('modalSucesso'));
         modal.show(); // Exibe o modal de sucesso
-      }
-
-      // Adicionar participantes (usuário e empresa) ao evento
-      const evento = {
-        summary: `Agendamento - ${nome}`,
-        description: `Serviços: ${servicosTexto}`,
-        start: {
-          dateTime: dataInicio.toISOString(),
-          timeZone: 'America/Sao_Paulo',
-        },
-        end: {
-          dateTime: dataFim.toISOString(),
-          timeZone: 'America/Sao_Paulo',
-        },
-        attendees: [
-          { email: payload.emailUsuario },  // E-mail do usuário
-          { email: payload.emailEmpresa }   // E-mail da empresa
-        ],
-        sendUpdates: 'all'  // Envia convites por e-mail
-      };
-
-      // Enviar o evento para o Google Calendar (API)
-      const googleCalendarRes = await fetch('/api/adicionar-evento-google', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(evento)
-      });
-
-      if (googleCalendarRes.ok) {
-        console.log('Convites enviados com sucesso');
-      } else {
-        console.error('Erro ao enviar convites');
       }
 
       const modal = document.getElementById('confirmacaoModal');
