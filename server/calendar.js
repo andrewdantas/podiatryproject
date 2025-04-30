@@ -72,7 +72,7 @@ async function criarEvento(auth, dados) {
         timeZone: 'America/Sao_Paulo',
       },
       attendees: [
-        { email: 'dantasandrew05@gmail.com' }, // Adicionar os e-mails dos participantes
+        { email: 'dantasandrew07@gmail.com' }, // Adicionar os e-mails dos participantes
       ],
     };
 
