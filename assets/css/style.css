@@ -31,10 +31,6 @@ h6 {
     font-weight: 600;
 }
 
-.text-purple {
-    color: var(--purple) !important;
-}
-
 /* ================ NAVBAR ================ */
 .navbar {
     background-color: var(--purple) !important;
@@ -46,19 +42,11 @@ h6 {
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-brand i {
-    font-size: 1.5rem;
-    color: var(--white);
 }
 
 .nav-link {
     font-weight: 500;
     padding: 8px 15px;
-    color: var(--white) !important;
     transition: all 0.3s ease;
 }
 
@@ -67,27 +55,31 @@ h6 {
     opacity: 0.8;
 }
 
-.nav-link.active {
-    font-weight: 700;
-}
-
 .bg-purple {
     background-color: var(--purple) !important;
+}
+
+.navbar-brand .fas {
+    font-size: 1.2rem;
+}
+
+.custom-spacing {
+    padding-left: 20px;
 }
 
 /* ================ HERO SECTION ================ */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), no-repeat center center;
     position: relative;
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
     background-size: cover;
+    height: 80vh;
     display: flex;
     align-items: center;
     text-align: center;
     color: var(--white);
     margin-top: -56px;
-    /* Compensar navbar fixa */
 }
 
 .hero-background-img {
@@ -121,145 +113,6 @@ h6 {
 .hero-section p.lead {
     font-size: 1.5rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* ================ FORMULÁRIO DE AGENDAMENTO ================ */
-main {
-    padding-bottom: 80px;
-}
-
-.card {
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px !important;
-}
-
-.form-label {
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 1rem;
-}
-
-.form-label i {
-    color: var(--purple);
-    margin-right: 8px;
-}
-
-.form-control,
-.form-select {
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    padding: 10px;
-    background-color: var(--light-gray);
-    font-size: 0.9rem;
-}
-
-.form-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" viewBox="0 0 16 16"><path d="M8 12l-4-4h8l-4 4z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px;
-}
-
-.form-check-label {
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
-.form-check-input {
-    margin-top: 0.2rem;
-}
-
-.form-check-input:checked {
-    background-color: var(--purple);
-    border-color: var(--purple);
-}
-
-h6 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    margin-top: 15px;
-    color: var(--text-color);
-}
-
-/* Ajuste para o layout de data e horário */
-.mb-3 .row {
-    align-items: center;
-}
-
-/* Estilização do input de data */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.5);
-}
-
-/* Estilização dos serviços */
-.servico-categoria {
-    border-left: 4px solid var(--purple);
-    transition: all 0.3s;
-}
-
-.servico-categoria:hover {
-    background-color: #f8f9fa;
-    transform: translateX(5px);
-}
-
-/* ================ SEÇÃO DE INFORMAÇÕES IMPORTANTES ================ */
-.list-group-item {
-    border: none;
-    padding: 10px 0;
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-
-.list-group-item i {
-    color: var(--purple);
-    margin-right: 8px;
-}
-
-.list-group-item strong {
-    font-weight: 600;
-}
-
-.badge {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background-color: var(--purple) !important;
-    color: var(--white);
-}
-
-.list-group-item a {
-    color: var(--purple);
-    text-decoration: none;
-}
-
-.list-group-item a:hover {
-    text-decoration: underline;
-}
-
-/* Botões Outline Purple */
-.btn-outline-purple {
-    border-color: var(--purple);
-    color: var(--purple);
-}
-
-.btn-outline-purple:hover {
-    background-color: var(--purple);
-    color: var(--white);
-}
-
-/* Modal */
-.modal-header.bg-purple {
-    background-color: var(--purple);
-}
-
-.alert.bg-purple {
-    background-color: var(--purple) !important;
 }
 
 /* ================ SERVIÇOS ================ */
@@ -333,7 +186,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--text-color);
     line-height: 1.6;
     margin-left: 34px;
-    /* Alinhar com o ícone */
 }
 
 /* MAPA */
@@ -425,18 +277,48 @@ footer hr {
     background-color: var(--purple);
     color: var(--white);
     border: none;
-    padding: 12px 25px;
+    padding: 10px 25px;
     transition: all 0.3s ease;
     font-weight: 500;
     border-radius: 5px;
-    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn-purple:hover {
     background-color: var(--light-purple);
     color: var(--white);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(106, 48, 147, 0.3);
+}
+
+/* Ajustes para o botão Limpar */
+.btn-secondary {
+    border-radius: 20px;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary:hover {
+    background-color: #adb5bd;
+    border-color: #bec6ce;
+    transform: translateY(-3px);
+    /* Adicionada a mesma animação de elevação */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Adicionada sombra similar, ajustada para combinar com o estilo */
+}
+
+/* Garante que os ícones sejam visíveis e bem proporcionados */
+.btn-purple i,
+.btn-secondary i {
+    font-size: 1.2rem;
+    margin: 0;
 }
 
 /* ================ RESPONSIVIDADE ================ */
@@ -452,46 +334,20 @@ footer hr {
     .hero-section h1 {
         font-size: 2.5rem;
     }
-
-    .navbar-nav {
-        text-align: center;
-    }
-
-    .nav-link {
-        padding: 10px 0;
-    }
-
-    .form-control,
-    .form-select {
-        font-size: 0.9rem;
-    }
 }
 
-/* Ajustes específicos para mobile */
 @media (max-width: 768px) {
     .hero-section {
         min-height: calc(100vh - 56px);
-        /* Ajusta a altura */
     }
 
     .hero-section h1 {
         font-size: 2rem;
-        /* Reduz o tamanho do título */
         margin-top: 0;
     }
 
     .hero-section p.lead {
         font-size: 1.2rem;
-        /* Reduz o tamanho do subtítulo */
-    }
-
-    .col-md-6 {
-        margin-bottom: 20px;
-    }
-
-    .btn-purple {
-        padding: 10px 20px;
-        font-size: 0.9rem;
     }
 }
 
@@ -523,32 +379,145 @@ footer hr {
     footer p {
         font-size: 0.9rem;
     }
+}
 
-    h1 {
-        font-size: 1.8rem;
-    }
+/* Ajustes para o formulário de agendamento */
+#agendamentoForm .col-md-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
-    .form-label {
-        font-size: 0.9rem;
-    }
+#agendamentoForm .form-label {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
 
-    .form-control,
-    .form-select {
-        font-size: 0.85rem;
-        padding: 8px;
-    }
+#agendamentoForm .fas {
+    color: var(--purple);
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
 
-    .list-group-item {
-        font-size: 0.85rem;
-    }
+#agendamentoForm h6 {
+    color: var(--purple);
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 
-    .badge {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-    }
+#agendamentoForm .form-check {
+    margin-bottom: 8px;
+}
 
-    .btn-purple {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-    }
+#agendamentoForm .form-check-label {
+    font-size: 0.9rem;
+}
+
+/* Estilo para o card de informações importantes */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .list-group-item {
+    border: none;
+    padding: 10px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.card .list-group-item i {
+    color: var(--purple);
+    margin-top: 2px;
+}
+
+.card .list-group-item div {
+    flex: 1;
+}
+
+.card .badge {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+/* Botão "Como chegar" */
+.btn-outline-purple {
+    border: 2px solid var(--purple);
+    color: var(--purple);
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.btn-outline-purple:hover {
+    background-color: var(--purple);
+    color: var(--white);
+}
+
+/* Ajustes para inputs e selects */
+.form-control,
+.form-select {
+    border-radius: 5px !important;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    height: 48px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 5px rgba(106, 48, 147, 0.3);
+}
+
+/* Ajustes para o título principal */
+h1 i {
+    color: var(--purple);
+}
+
+/* Ajustes para o texto de localização */
+.card p {
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.card p i {
+    margin-top: 2px;
+}
+
+/* Ajustes para ícones */
+.text-purple {
+    color: var(--purple);
+}
+
+/* Ajustes para alinhamento dos campos */
+#agendamentoForm .mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+#agendamentoForm .row.mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+#agendamentoForm .col-md-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#agendamentoForm .form-check-input {
+    margin-top: 2px;
+}
+
+/* Ajustes para o card de informações importantes */
+.card .list-group-flush .list-group-item {
+    padding: 8px 0;
+}
+
+.card hr {
+    margin: 15px 0;
 }

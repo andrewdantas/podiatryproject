@@ -1,4 +1,4 @@
-const CACHE_NAME = 'shalom_adonai'
+const CACHE_NAME = 'shalom-adonai-v2'
 const ASSETS = [
     '/',
     '/index.html',

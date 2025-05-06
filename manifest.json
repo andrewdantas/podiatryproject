@@ -3,7 +3,7 @@
     "short_name": "Shalom Adonai",
     "description": "Salão de beleza feminino especializado em cabelos, unhas e tratamentos estéticos.",
     "lang": "pt-BR",
-    "start_url": "/estetica/pages/agendamento.html",
+    "start_url": "/salaov2.1/pages/agendamento.html",
     "scope": "/",
     "display": "standalone",
     "background_color": "#6a3093",

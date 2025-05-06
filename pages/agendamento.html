@@ -1,220 +1,245 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nanda - Shalom Adonai | Agendamento</title>
-    <!-- Bootstrap 5.3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- Seu CSS -->
+    <title>Agendamento</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="icon" href="../assets/img/favicon.ico" />
-    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="manifest" href="../manifest.json">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top shadow">
+    <nav class="navbar navbar-dark bg-purple fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <i class="fas fa-spa me-2"></i> Shalom Adonai
+            <a class="navbar-brand">
+                <i class="fas fa-spa me-2"></i>Nanda - Shalom Adonai
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="../index.html"><i class="fas fa-home me-1"></i> Home</a>
-                    <a class="nav-link" href="cabelos.html"><i class="fas fa-cut me-1"></i> Cabelos</a>
-                    <a class="nav-link" href="unhas.html"><i class="fas fa-hand-sparkles me-1"></i> Unhas</a>
-                    <a class="nav-link" href="sobrancelhas.html"><i class="fas fa-eye me-1"></i> Sobrancelhas</a>
-                    <a class="nav-link" href="depilacao.html"><i class="fas fa-spa me-1"></i> Depilação</a>
-                    <a class="nav-link" href="podologia.html"><i class="fas fa-foot me-1"></i> Podologia</a>
-                    <a class="nav-link active" href="agendamento.html"><i class="fas fa-calendar-check me-1"></i> Agendamento</a>
-                </div>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cabelos.html">Cabelos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unhas.html">Unhas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobrancelhas.html">Sobrancelhas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="depilacao.html">Depilação</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="podologia.html">Podologia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="agendamento.html">Agendamento</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-5 pt-5">
-        <h1 class="text-center mb-4 text-purple fw-bold">
+    <main class="container mt-5 pt-4">
+        <h1 class="text-center mb-4">
             <i class="fas fa-calendar-alt me-2"></i> Agende Seu Horário
         </h1>
-
-        <div class="row g-4">
-            <!-- Formulário -->
-            <div class="col-lg-7">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <form id="agendamentoForm">
-                            <!-- Dados Pessoais -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-6">
-                                    <label for="nome" class="form-label fw-bold">
-                                        <i class="fas fa-user me-1"></i> Nome Completo
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg" id="nome" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="telefone" class="form-label fw-bold">
-                                        <i class="fas fa-phone me-1"></i> Telefone/WhatsApp
-                                    </label>
-                                    <input type="tel" class="form-control form-control-lg" id="telefone" required />
-                                </div>
-                            </div>
-
-                            <!-- Serviços -->
-                            <div class="mb-4">
-                                <h5 class="fw-bold mb-3 text-purple">
-                                    <i class="fas fa-concierge-bell me-2"></i> Serviços e Profissionais
-                                </h5>
-                                <div class="row">
-                                    <!-- Coluna 1 -->
-                                    <div class="col-md-6">
-                                        <!-- Cabelos -->
-                                        <div class="mb-4">
-                                            <h6 class="fw-bold text-purple mb-2">Cabelos</h6>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="cabelosFernanda" value="Fernanda">
-                                                <label class="form-check-label" for="cabelosFernanda">Fernanda</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="cabelosRosana" value="Rosana">
-                                                <label class="form-check-label" for="cabelosRosana">Rosana</label>
-                                            </div>
-                                        </div>
-                                        <!-- Unhas -->
-                                        <div class="mb-4">
-                                            <h6 class="fw-bold text-purple mb-2">Unhas</h6>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="unhasDaniela" value="Daniela (Manicure e Pedicure)">
-                                                <label class="form-check-label" for="unhasDaniela">Daniela (Manicure e
-                                                    Pedicure)</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="unhasGeisa" value="Geisa (Manicure e Pedicure)">
-                                                <label class="form-check-label" for="unhasGeisa">Geisa (Manicure e
-                                                    Pedicure)</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="unhasThalia" value="Thalia (Manicure e Pedicure)">
-                                                <label class="form-check-label" for="unhasThalia">Thalia (Manicure e
-                                                    Pedicure)</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Coluna 2 -->
-                                    <div class="col-md-6">
-                                        <!-- Podologia -->
-                                        <div class="mb-4">
-                                            <h6 class="fw-bold text-purple mb-2">Podologia</h6>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="podologiaGeisa" value="Geisa (Podologia)">
-                                                <label class="form-check-label" for="podologiaGeisa">Geisa
-                                                    (Podologia)</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="podologiaThalia" value="Thalia (Podologia)">
-                                                <label class="form-check-label" for="podologiaThalia">Thalia
-                                                    (Podologia)</label>
-                                            </div>
-                                        </div>
-                                        <!-- Sobrancelhas -->
-                                        <div class="mb-4">
-                                            <h6 class="fw-bold text-purple mb-2">Sobrancelhas</h6>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="sobrancelhasCarol" value="Carol (Design)">
-                                                <label class="form-check-label" for="sobrancelhasCarol">Carol
-                                                    (Design)</label>
-                                            </div>
-                                        </div>
-                                        <!-- Cílios -->
-                                        <div class="mb-4">
-                                            <h6 class="fw-bold text-purple mb-2">Cílios</h6>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="servicos[]"
-                                                    id="ciliosTiffany" value="Tiffany">
-                                                <label class="form-check-label" for="ciliosTiffany">Tiffany</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Data e Hora -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-6">
-                                    <label for="data" class="form-label fw-bold">
-                                        <i class="fas fa-calendar-day me-1"></i> Data
-                                    </label>
-                                    <input type="date" class="form-control form-control-lg" id="data" required
-                                        onkeydown="return false" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="hora" class="form-label fw-bold">
-                                        <i class="fas fa-clock me-1"></i> Horário
-                                    </label>
-                                    <select class="form-select form-select-lg" id="hora" required>
-                                        <option value="" selected disabled>Selecione</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2 d-md-flex">
-                                <button type="submit" class="btn btn-purple btn-lg flex-grow-1 py-3 fw-bold">
-                                    <i class="fas fa-calendar-check me-2"></i> Confirmar
-                                </button>
-                                <button type="reset" class="btn btn-outline-secondary btn-lg flex-grow-1 py-3">
-                                    <i class="fas fa-broom me-2"></i> Limpar
-                                </button>
-                            </div>
-                        </form>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="agendamentoForm" class="card shadow p-4">
+                    <!-- Nome e Telefone -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nome" class="form-label d-flex align-items-center">
+                                <i class="fas fa-user me-2 text-purple"></i> Nome Completo
+                            </label>
+                            <input type="text" id="nome" class="form-control rounded" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="telefone" class="form-label d-flex align-items-center">
+                                <i class="fas fa-phone me-2 text-purple"></i> Telefone/WhatsApp
+                            </label>
+                            <input type="tel" id="telefone" class="form-control rounded" required />
+                        </div>
                     </div>
+
+                    <!-- Serviços e Profissionais -->
+                    <div class="mb-3">
+                        <label class="form-label d-flex align-items-center">
+                            <i class="fas fa-cut me-2 text-purple"></i> Serviços e Profissionais
+                        </label>
+                        <div class="row">
+                            <!-- Cabelos -->
+                            <div class="col-md-6">
+                                <h6>Cabelos</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="fernanda" value="Fernanda">
+                                    <label class="form-check-label" for="fernanda">Fernanda</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rosana" value="Rosana">
+                                    <label class="form-check-label" for="rosana">Rosana</label>
+                                </div>
+                            </div>
+                            <!-- Podologia -->
+                            <div class="col-md-6">
+                                <h6>Podologia</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="geisaPodologia"
+                                        value="Geisa">
+                                    <label class="form-check-label" for="geisaPodologia">Geisa</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="thalitaPodologia"
+                                        value="Thalita">
+                                    <label class="form-check-label" for="thalitaPodologia">Thalita</label>
+                                </div>
+                            </div>
+                            <!-- Unhas -->
+                            <div class="col-md-6 mt-3">
+                                <h6>Unhas</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="daniela"
+                                        value="Daniela">
+                                    <label class="form-check-label" for="daniela">Daniela</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="geisaUnhas"
+                                        value="Geisa">
+                                    <label class="form-check-label" for="geisaUnhas">Geisa</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="thalitaUnhas"
+                                        value="Thalita">
+                                    <label class="form-check-label" for="thalitaUnhas">Thalita</label>
+                                </div>
+                            </div>
+                            <!-- Sobrancelhas -->
+                            <div class="col-md-6 mt-3">
+                                <h6>Sobrancelhas</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="carol" value="Carol">
+                                    <label class="form-check-label" for="carol">Carol</label>
+                                </div>
+                            </div>
+                            <!-- Cílios -->
+                            <div class="col-md-6 mt-3">
+                                <h6>Cílios</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="tiffany" value="Tiffany">
+                                    <label class="form-check-label" for="tiffany">Tiffany</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data e Horário -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="data" class="form-label d-flex align-items-center">
+                                <i class="fas fa-calendar-alt me-2 text-purple"></i> Data
+                            </label>
+                            <input type="date" id="data" class="form-control rounded" required
+                                onkeydown="return false" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hora" class="form-label d-flex align-items-center">
+                                <i class="fas fa-clock me-2 text-purple"></i> Horário
+                            </label>
+                            <select id="hora" class="form-select rounded" required>
+                                <option value="" selected disabled>Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-purple w-100 rounded">Confirmar</button>
+                        <button type="reset" class="btn btn-secondary w-100 rounded">Limpar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Informações Importantes -->
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h5 class="d-flex align-items-center">
+                        <i class="fas fa-info-circle me-2 text-purple"></i> Informações Importantes
+                    </h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-clock me-2 text-purple"></i>
+                            <div>
+                                <strong>Horário de Funcionamento:</strong><br>Terça a Sábado, das 9h às 19h
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-hourglass-half me-2 text-purple"></i>
+                            <div>
+                                <strong>Duração dos Serviços:</strong>
+                                <div class="mt-2">
+                                    <span class="badge bg-purple rounded-pill">30min</span>
+                                    <span class="badge bg-purple rounded-pill">1h</span>
+                                    <span class="badge bg-purple rounded-pill">2h</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-exclamation-circle me-2 text-purple"></i>
+                            <div>
+                                <strong>Política de Cancelamento:</strong><br>Cancelamentos com menos de 24h de
+                                antecedência podem ser cobrados
+                            </div>
+                        </li>
+                    </ul>
+                    <hr>
+                    <p class="d-flex align-items-center">
+                        <i class="fas fa-map-marker-alt me-2 text-purple"></i> Localização:<br>R. Nhatumani, 496 -
+                        Centro, SP
+                    </p>
+                    <a href="https://www.google.com/maps/place/R.+Nhatumani,+496" target="_blank"
+                        class="btn btn-purple w-100 mt-3 rounded">Como chegar</a>
                 </div>
             </div>
-             <!-- Informações Importantes -->
-      <div class="col-lg-5">
-        <div class="card shadow-sm border-0 h-100">
-          <div class="card-body p-4">
-            <h5 class="card-title fw-bold mb-4">
-              <i class="fas fa-calendar-check me-2 text-purple"></i> Informações Importantes
-            </h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex align-items-center border-0 py-3">
-                <div class="bg-opacity-10 me-3">
-                  <i class="fas fa-calendar-check me-2 text-purple"></i>
-                </div>
-                <div>
-                  <strong>Horário de Funcionamento:</strong><br>
-                  Terça a Sábado, das 9h às 19h
-                </div>
-              </li>
-              <li class="list-group-item d-flex align-items-center border-0 py-3">
-                <div class="bg-opacity-10 me-3">
-                  <i class="fas fa-phone me-2 text-purple"></i>
-                </div>
-                <div>
-                  <strong>Telefone:</strong><br>
-                  (11) 5555-5555
-                </div>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </main>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmacaoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agendamento Confirmado!</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmacaoTexto"></p>
+                    <div class="alert alert-info">
+                        Você receberá um e-mail de confirmação.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="googleCalendarLink" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-google"></i> Adicionar ao Google Agenda
+                    </a>
+                    <a id="whatsappLink" class="btn btn-success" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Confirmar via WhatsApp
+                    </a>
+                    <button class="btn btn-purple" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/agendamento.js"></script>
 </body>
 
